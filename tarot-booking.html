@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演唱會塔羅諮詢 - 指引您的音樂之旅</title>
+    <style>
+        :root {
+            --primary-dark: #3d3d3d;
+            --primary-light: #e8e5e0;
+            --secondary: #b8a89a;
+            --accent: #d4af37;
+            --soft-lavender: #c9c4d1;
+            --warm-beige: #f5f2ed;
+            --text-dark: #2d2d2d;
+            --text-light: #7a7a7a;
+            --success: #8b9d7d;
+            --border: #e0dcd8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--warm-beige);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px 50px;
+            background: linear-gradient(135deg, rgba(200, 196, 209, 0.15) 0%, rgba(184, 168, 154, 0.1) 100%);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 50px;
+            border-radius: 12px;
+        }
+
+        .logo {
+            font-size: 36px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 15px;
+            color: var(--secondary);
+            margin-top: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .section h2 {
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+        }
+
+        /* Service Cards */
+        .services-section {
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 4px 12px rgba(184, 168, 154, 0.15);
+        }
+
+        .service-card input[type="radio"] {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .service-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .service-price {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .service-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-left: 28px;
+            line-height: 1.5;
+        }
+
+        /* Calendar */
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .calendar thead th {
+            background-color: var(--soft-lavender);
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .calendar tbody td {
+            border: 1px solid var(--border);
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 13px;
+        }
+
+        .calendar tbody td:hover:not(.empty) {
+            background-color: rgba(184, 168, 154, 0.08);
+            border-color: var(--secondary);
+        }
+
+        .calendar .empty {
+            background-color: #fafaf9;
+            cursor: default;
+        }
+
+        .calendar .today {
+            background-color: var(--soft-lavender);
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar .selected {
+            background-color: var(--accent);
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .month-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .month-nav button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .month-nav button:hover {
+            background: var(--primary-dark);
+        }
+
+        .month-title {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .time-slot {
+            padding: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .time-slot:hover {
+            border-color: var(--secondary);
+            background-color: rgba(184, 168, 154, 0.05);
+        }
+
+        .time-slot.selected {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(184, 168, 154, 0.1);
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        /* Summary */
+        .summary-box {
+            background-color: var(--warm-beige);
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 13px 28px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary-dark);
+            border: 1px solid var(--border);
+            width: 100%;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--secondary);
+            background-color: rgba(184, 168, 154, 0.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            max-width: 500px;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--success);
+            letter-spacing: 1px;
+        }
+
+        .modal p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .payment-info {
+            background-color: var(--warm-beige);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 25px 0;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .payment-info strong {
+            color: var(--primary-dark);
+        }
+
+        /* Info Section */
+        .info-section {
+            background: var(--warm-beige);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .info-section h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            letter-spacing: 1px;
+        }
+
+        .info-section p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            header {
+                padding: 40px 20px 30px;
+            }
+        }
+
+        .selected-info {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-top: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">✨ 🎭 ✨</div>
+            <h1>演唱會塔羅</h1>
+            <p class="subtitle">Concert Divination Guidance</p>
+            <p class="tagline">找到屬於你的音樂之旅</p>
+        </header>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <h3>💫 關於我們的服務</h3>
+            <p>透過塔羅的智慧，我們幫助您找到最適合的演唱會時刻、位置選擇，以及針對您特定的音樂疑問進行深度諮詢。每一次預約都是一趟個人的靈性之旅。</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-grid">
+            <!-- Left: Calendar & Time Selection -->
+            <div class="section">
+                <h2>選擇日期</h2>
+                <div class="month-nav">
+                    <button onclick="previousMonth()">← 上月</button>
+                    <span class="month-title" id="monthTitle"></span>
+                    <button onclick="nextMonth()">下月 →</button>
+                </div>
+                <table class="calendar" id="calendar"></table>
+                <div class="selected-info" id="selectedDateInfo"></div>
+
+                <h2 style="margin-top: 35px;">選擇時間</h2>
+                <div class="time-slots" id="timeSlots"></div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="section">
+                <h2>預約資訊</h2>
+                
+                <div class="summary-box">
+                    <div class="summary-item">
+                        <span class="summary-label">選擇日期：</span>
+                        <span class="summary-value" id="summaryDate">未選擇</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">選擇時間：</span>
+                        <span class="summary-value" id="summaryTime">未選擇</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">諮詢服務：</span>
+                        <span class="summary-value" id="summaryService">未選擇</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">預計費用：</span>
+                        <span class="summary-value" id="summaryPrice">$0</span>
+                    </div>
+                </div>
+
+                <form id="bookingForm">
+                    <h2 style="font-size: 16px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">選擇服務</h2>
+                    
+                    <div class="services-section">
+                        <label class="service-card">
+                            <div class="service-header">
+                                <input type="radio" name="service" value="演唱會日期指引" data-price="100" required onchange="updateService()">
+                                <span class="service-name">演唱會日期指引</span>
+                                <span class="service-price">$100</span>
+                            </div>
+                            <div class="service-desc">透過塔羅指引，找到最適合您的演唱會日期</div>
+                        </label>
+
+                        <label class="service-card">
+                            <div class="service-header">
+                                <input type="radio" name="service" value="位置選擇諮詢" data-price="100" required onchange="updateService()">
+                                <span class="service-name">位置選擇諮詢</span>
+                                <span class="service-price">$100</span>
+                            </div>
+                            <div class="service-desc">指引您選擇最佳的演唱會座位位置</div>
+                        </label>
+
+                        <label class="service-card">
+                            <div class="service-header">
+                                <input type="radio" name="service" value="客製化線上諮詢" data-price="500" required onchange="updateService()">
+                                <span class="service-name">客製化線上諮詢</span>
+                                <span class="service-price">$500</span>
+                            </div>
+                            <div class="service-desc">30分鐘線上深度諮詢，解答您的音樂與人生疑問</div>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">您的姓名 *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">電子郵件 *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">聯絡電話 *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">備註（選填）</label>
+                        <textarea id="message" name="message" placeholder="請告訴我您想探討的特定問題或背景..."></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="submitForm()">確認預約</button>
+                    <button type="reset" class="btn btn-secondary" style="margin-top: 12px;">清除表單</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">✨</div>
+            <h2>預約成功！</h2>
+            <p id="successMessage"></p>
+            <div class="payment-info">
+                <strong>📧 匯款帳號資訊：</strong><br><br>
+                銀行：台灣銀行<br>
+                帳號：123-456-789-012<br>
+                戶名：音樂塔羅諮詢室<br><br>
+                <strong>請於確認收到此信後，3天內完成匯款。</strong>
+            </div>
+            <p style="font-size: 12px; color: var(--text-light);">我們將於收到您的匯款後，主動與您聯繫確認預約時間。</p>
+            <button class="btn btn-primary" onclick="closeModal()">完成</button>
+        </div>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        let selectedDate = null;
+        let selectedTime = null;
+        let selectedService = null;
+        let selectedPrice = 0;
+
+        const timeSlots = ['10:00', '14:00', '15:30', '17:00', '19:00', '20:30'];
+
+        function initCalendar() {
+            renderCalendar();
+            renderTimeSlots();
+        }
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', 
+                               '七月', '八月', '九月', '十月', '十一月', '十二月'];
+            document.getElementById('monthTitle').textContent = `${year} 年 ${monthNames[month]}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            let html = '<thead><tr>';
+            const dayNames = ['日', '一', '二', '三', '四', '五', '六'];
+            dayNames.forEach(day => {
+                html += `<th>${day}</th>`;
+            });
+            html += '</tr></thead><tbody><tr>';
+
+            for (let i = firstDay - 1; i >= 0; i--) {
+                html += `<td class="empty">${daysInPrevMonth - i}</td>`;
+            }
+
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const cellDate = new Date(year, month, day);
+                const isToday = cellDate.toDateString() === today.toDateString();
+                const isSelected = selectedDate && cellDate.toDateString() === selectedDate.toDateString();
+                const isDisabled = cellDate < today;
+                
+                let className = '';
+                if (isToday) className = 'today';
+                if (isSelected) className = 'selected';
+                if (isDisabled) className = 'empty';
+
+                html += `<td class="${className}" ${!isDisabled ? `onclick="selectDate(new Date(${year}, ${month}, ${day}))"` : ''}>${day}</td>`;
+                
+                if ((firstDay + day) % 7 === 0 && day < daysInMonth) {
+                    html += '</tr><tr>';
+                }
+            }
+
+            const totalCells = firstDay + daysInMonth;
+            const remainingCells = 42 - totalCells;
+            for (let day = 1; day <= remainingCells; day++) {
+                html += `<td class="empty">${day}</td>`;
+            }
+
+            html += '</tr></tbody>';
+            document.getElementById('calendar').innerHTML = html;
+        }
+
+        function selectDate(date) {
+            selectedDate = date;
+            selectedTime = null;
+            renderCalendar();
+            renderTimeSlots();
+            updateSummary();
+            
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            const dateStr = selectedDate.toLocaleDateString('zh-TW', options);
+            document.getElementById('selectedDateInfo').textContent = `已選擇: ${dateStr}`;
+        }
+
+        function renderTimeSlots() {
+            let html = '';
+            timeSlots.forEach(slot => {
+                const isSelected = selectedTime === slot;
+                html += `<div class="time-slot ${isSelected ? 'selected' : ''}" onclick="selectTime('${slot}')">${slot}</div>`;
+            });
+            document.getElementById('timeSlots').innerHTML = html;
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            renderTimeSlots();
+            updateSummary();
+        }
+
+        function updateService() {
+            const selected = document.querySelector('input[name="service"]:checked');
+            if (selected) {
+                selectedService = selected.value;
+                selectedPrice = parseInt(selected.dataset.price);
+                updateSummary();
+            }
+        }
+
+        function updateSummary() {
+            if (selectedDate) {
+                const options = { month: 'short', day: '2-digit' };
+                const dateStr = selectedDate.toLocaleDateString('zh-TW', options);
+                document.getElementById('summaryDate').textContent = dateStr;
+            } else {
+                document.getElementById('summaryDate').textContent = '未選擇';
+            }
+
+            document.getElementById('summaryTime').textContent = selectedTime || '未選擇';
+            document.getElementById('summaryService').textContent = selectedService || '未選擇';
+            document.getElementById('summaryPrice').textContent = `$${selectedPrice}`;
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            selectedDate = null;
+            selectedTime = null;
+            renderCalendar();
+            updateSummary();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            selectedDate = null;
+            selectedTime = null;
+            renderCalendar();
+            updateSummary();
+        }
+
+        function submitForm() {
+            const form = document.getElementById('bookingForm');
+            
+            if (!form.checkValidity()) {
+                alert('請填寫所有必填欄位');
+                return;
+            }
+
+            if (!selectedDate || !selectedTime || !selectedService) {
+                alert('請選擇預約日期、時間和服務項目');
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            const dateStr = selectedDate.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            
+            const successMessage = `感謝您的預約！<br><br>
+                <strong>${name}</strong> 您好，<br>
+                預約日期：${dateStr}<br>
+                預約時間：${selectedTime}<br>
+                諮詢服務：${selectedService}<br>
+                預計費用：NT$${selectedPrice}<br><br>
+                我們已收到您的預約申請，請於3日內完成匯款。<br>
+                我們將於收到款項後，透過 ${email} 確認您的預約。`;
+            
+            document.getElementById('successMessage').innerHTML = successMessage;
+            document.getElementById('successModal').classList.add('active');
+
+            form.reset();
+            selectedDate = null;
+            selectedTime = null;
+            selectedService = null;
+            selectedPrice = 0;
+            updateSummary();
+            renderCalendar();
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        initCalendar();
+    </script>
+</body>
+</html>
